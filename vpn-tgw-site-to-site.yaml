@@ -2,12 +2,16 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: "Create a TGW with a VPN Connection.  Add a route in the VPC RouteTable for the remote CIDR and associate a local VPC with the TGW"
 Parameters:
     TGWASN:
-      Type: String
+      Type: Number
       #ASN 65000 has issues with this setup due to CGW creates ASN by default as 65000, and that conflicts with TGW
       Default: 65001
+      MinValue: 65001
+      MaxValue: 65534
     CGWASN:
-      Type: String
+      Type: Number
       Default: 65000
+      MinValue: 64512
+      MaxValue: 65534
     CGWIPAddr:
       Type: String
     CGWName:
@@ -25,10 +29,15 @@ Parameters:
     PreSharedKey:
       Type: String
       NoEcho: True
+      MinLength: 8
+      MaxLength: 64
+      AllowedPattern: "^[a-z][a-zA-Z._0-9]+$"
     RemoteCIDR:
       Type: String
     VPCRouteTableID:
       Type: String
+      AllowedPattern: "^rtb-[a-z0-9]+"
+      MaxLength: 22
 Resources:
     EC2VPNConnection:
         Type: "AWS::EC2::VPNConnection"
