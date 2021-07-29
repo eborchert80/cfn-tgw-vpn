@@ -1,4 +1,4 @@
-# cfn-tgw-vpn
+```# cfn-tgw-vpn
 CloudFormation Templates to establish a site to site VPN with TGW or VGW
                 VPN
 <site1>-------------------<site2>
@@ -23,4 +23,4 @@ e.g,
  aws ec2 create-customer-gateway --bgp-asn 65001 --public-ip 34.1.1.1 --device-name Site1-CGW --type ipsec.1
  aws ec2  modify-vpn-connection  --vpn-connection-id <vpn-id-of-site1-to-site2> --customer-gateway-id <cgw-id created in previous step>
 
-Once the config modifications take place you should see the First Tunnel Come up. Give it 5-10 minutes for AWS to complete the provisioning 
+Once the config modifications take place you should see the First Tunnel Come up. Give it 5-10 minutes for AWS to complete the provisioning ```
