@@ -21,6 +21,7 @@ Parameters:
     VPCId:
       Type: AWS::EC2::VPC::Id
     SubnetId:
+      Description: Subnet ID for where this VPN Gateway will reside
       Type: AWS::EC2::Subnet::Id
     TunnelCidr:
       Type: String
@@ -66,6 +67,7 @@ Resources:
                 Value: !Ref CGWName
     EC2Route:
         Type: "AWS::EC2::Route"
+        DependsOn: EC2TransitGateway
         Properties:
             DestinationCidrBlock: !Ref RemoteCIDR
             RouteTableId: !Ref VPCRouteTableID
